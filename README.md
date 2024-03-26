@@ -13,7 +13,7 @@ Este é um projeto para organizar e extrair dados de editais, com o objetivo de 
 
 ## Modelagem dos Dados
 
-![Modelagem](C:\Users\tubia\Downloads\Imagem do WhatsApp de 2024-03-25 à(s) 17.28.17_96fbfa4e.jpg)
+![Modelagem](/src/img/modelo.jpg)
 
 ## Links dos Editais
 
