@@ -7,13 +7,13 @@ Este é um projeto para organizar e extrair dados de editais, com o objetivo de 
 - Organizar em Git (Github ou *Gitlab) (Consultar o Anderson)
 - Carregar todos os editais do ano (navegar através da página PRÓXIMO)
 - Normalizar como salvar e registrar os dados extraídos (no momento estão em JSON)
-    - Verificar problemas de encoding
+  - Verificar problemas de encoding
 - Extrair PDF
 - Tentar salvar um edital no projeto e no banco
 
 ## Modelagem dos Dados
 
-![Modelagem](C:\Users\tubia\Downloads\Imagem do WhatsApp de 2024-03-25 à(s) 17.28.17_96fbfa4e.jpg)
+![](C:\Users\tubia\Downloads\Imagem do WhatsApp de 2024-03-25 à(s) 17.28.17_96fbfa4e.jpg)
 
 ## Links dos Editais
 
