@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 25 15:15:02 2024
+
+@author: artur
+"""
+# %% TODO
+'''
+    * Atualizar automático a lista não ordenada "ul" de Editais e Resultados
+    * Verificar o edital dado o ano atual e o ano anterior [import datetime]
+        import datetime
+        today = datetime.date.today()
+        year = today.year
+    * Tratamento para erro e/ou aviso caso a conexão não seja estabelecida ou caia
+'''
+
+# %% Setup environment
+import requests
+from bs4 import BeautifulSoup
+import json
+
+import time
+import random as rnd
+# import pdfquery
+# import pypdf
+# import py2pdf
+import textract
+import models as md
+
+editals = []
+# %% Resources
+def wait(initial=1, random=4):
+    '''
+        Parameters:
+            initial = time base in seconds
+            random = variant time in seconds (random between 0% until 100%)
+        Wait for some seconds for avoid IP block.
+    '''
+    time.sleep(initial+time.sleep(random)*rnd.random())
+
+# %% Initial requests
+url_init = 'https://prograd.ufc.br/pt/editais-e-resultados/'
+page_init = requests.get(url_init) # HTTP GET
+
+soup = BeautifulSoup(page_init.text, 'html.parser')
+editais_ano_ul = soup.find_all('ul')[3] # Lista de "Editais e Resultados"
+edital2024 = editais_ano_ul.find_all('li')[1].find('a').get('href') # ano de 2024
+del soup
+
+# %% 
+# get for year
+wait()
+edital_year_1 = requests.get(edital2024)
+soup = BeautifulSoup(edital_year_1.text, 'html.parser')
+cards = soup.find('main').find('section').find_all('div', attrs={"class": "card"})
+
+# md.Edital()
+del soup
+
+# %% Saving each edital
+for card in cards:
+    header = card.find('div', attrs={"class": "card-header"})
+    name = header.find('h1').get_text()
+    date = header.find('span', attrs={"class": "date"}).get_text()
+    abstract = card.find('div', attrs={"class": "card-content"}).get_text()
+    editals.append( md.Edital(name, date, abstract, '') )
+
+# %% Saving
+file = open('temporary_saving.json', 'w', encoding='utf-8')
+
+for edital in editals:
+    print(str(edital.textJSON()))
+    
+file.write(json.dumps([edital.textJSON() for edital in editals]))
+file.close()

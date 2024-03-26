@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 25 16:25:14 2024
+
+@author: artur
+"""
+
+class Edital:# class data
+    def __init__(self, name, date, abstract, link):
+        self.name = name
+        self.date = date
+        self.abstract = abstract
+        self.link = link
+    
+    def textJSON(self):
+        return {'name': self.name,
+                'date': self.date,
+                'abstract': self.abstract,
+                'link': self.link}
